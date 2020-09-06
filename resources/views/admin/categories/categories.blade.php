@@ -46,15 +46,15 @@
 										<td>{{$category->url}}</td>
 										<td>
 											@if($category->status==1)
-											<a class="updateCategoryStatus" id="category-{{$category->id}}" category_id="{{$category->id}}" href="javascript:void(0)">Active</a>
+											<a class="updateCategoryStatus" id="category-{{$category->id}}" category_id="{{$category->id}}" href="javascript:void(0)"><i class='fa fa-toggle-on' status='Active'></i></a>
 											@else
-											<a class="updateCategoryStatus" id="category-{{$category->id}}" category_id="{{$category->id}}" href="javascript:void(0)">Inactive</a>
+											<a class="updateCategoryStatus" id="category-{{$category->id}}" category_id="{{$category->id}}" href="javascript:void(0)"><i class='fa fa-toggle-off' status='Inactive'></i></a>
 											@endif
 										</td>
 										<td>
-											<a href="{{url('admin/add-edit-category/'. $category->id)}}">Edit</a>
+											<a href="{{url('admin/add-edit-category/'. $category->id)}}"><i class='fa fa-edit' status='Inactive'></i></a>
 											&nbsp;
-											<a class="confirmDelete" href="javascript:void(0)" record="category" recordid="{{$category->id}}" <?php /* href="{{url('admin/delete-category/'. $category->id)}}"*/ ?> >Delete</a>
+											<a class="confirmDelete" href="javascript:void(0)" record="category" recordid="{{$category->id}}" <?php /* href="{{url('admin/delete-category/'. $category->id)}}"*/ ?> ><i class='fa fa-trash' status='Inactive'></i></a>
 										</td>
 									</tr>
 									@endforeach

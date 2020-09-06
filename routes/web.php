@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.templates.main');
-});
 
 Auth::routes();
 
@@ -48,8 +45,31 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
 	   Route::get('/products', 'ProductsController@products');
 	   Route::post('/update-product-status', 'ProductsController@updateProductStatus');
 	   Route::get('/delete-product/{id}', 'ProductsController@deleteProduct');
+	   Route::get('/delete-product-image/{id}', 'ProductsController@deleteProductImage');
+	   Route::get('/delete-product-video/{id}', 'ProductsController@deleteProductVideo');
        Route::match(['get', 'post'], '/add-edit-product/{id?}', 'ProductsController@addEditProduct');
+
+       //Attributes
+       Route::match(['get','post'],'add-attributes/{id}','ProductsController@addAttributes');
+       Route::post('edit-attributes/{id}','ProductsController@editAttributes');
+       Route::post('/update-attribute-status', 'ProductsController@updateAttributeStatus');
+	   Route::get('/delete-attribute/{id}', 'ProductsController@deleteAttribute');
+
+	   //Images
+       Route::match(['get','post'],'add-images/{id}','ProductsController@addImages');
+       Route::post('/update-image-status', 'ProductsController@updateImageStatus');
+	   Route::get('/delete-image/{id}', 'ProductsController@deleteImage');
+
+	   //Brands
+	    Route::get('brands','BrandController@brands');
+	    Route::post('update-brand-status','BrandController@updateBrandStatus');
+	    Route::match(['get','post'],'add-edit-brand/{id?}','BrandController@addEditBrand');
+	    Route::get('delete-brand/{id?}','BrandController@deleteBrand');
     });
 
-
 }); 
+
+
+Route::namespace('Front')->group(function(){
+		Route::get('/', 'IndexController@index');
+	});

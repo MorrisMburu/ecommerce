@@ -61,6 +61,13 @@
                         </a>
                       </li>
                       <li>
+                        <a href="{{url('admin/brands')}}" class="nav-link">
+                          <p>
+                            Brands 
+                          </p>
+                        </a>
+                      </li>
+                      <li>
                         <a href="{{url('admin/categories')}}" class="nav-link">
                           <p>
                             Categories 

@@ -1561,7 +1561,6 @@ function init_PNotify() {
     console.log('init_PNotify');
 };
 
-
 /* CUSTOM NOTIFICATION */
 
 function init_CustomNotification() {
@@ -1642,7 +1641,7 @@ $('#current_pwd').keyup(function(){
 });
 
 $(".updateSectionStatus").click(function () {
-    var status = $(this).text();
+    var status = $(this).children("i").attr("status");
     var section_id = $(this).attr("section_id");
     $.ajax({
         type:'post',
@@ -1650,9 +1649,9 @@ $(".updateSectionStatus").click(function () {
         data: {status:status, section_id:section_id},
         success: function (resp) {
             if (resp['status']==0) {
-                $("#section-"+section_id).html("<a class='updateSectionStatus' href='javascript:void(0)'>Inactive</a>");
+                $("#section-"+section_id).html("<i class='fa fa-toggle-off' status='Inactive'></i>");
             } else if (resp['status'] ==1) {
-                $("#section-"+section_id).html("<a class='updateSectionStatus' href='javascript:void(0)'>Active</a>");
+                $("#section-"+section_id).html("<i class='fa fa-toggle-on' status='Active'></i>");
             }
         }, 
         error: function () {
@@ -1662,7 +1661,7 @@ $(".updateSectionStatus").click(function () {
 });
 
 $(".updateCategoryStatus").click(function () {
-    var status = $(this).text();
+    var status = $(this).children("i").attr("status");
     var category_id = $(this).attr("category_id");
     $.ajax({
         type:'post',
@@ -1670,9 +1669,9 @@ $(".updateCategoryStatus").click(function () {
         data: {status:status, category_id:category_id},
         success: function (resp) {
             if (resp['status']==0) {
-                $("#category-"+category_id).html("<a class='updateCategoryStatus' href='javascript:void(0)'>Inactive</a>");
+                $("#category-"+category_id).html("<i class='fa fa-toggle-off' status='Inactive'></i>");
             } else if (resp['status'] ==1) {
-                $("#category-"+category_id).html("<a class='updateCategoryStatus' href='javascript:void(0)'>Active</a>");
+                $("#category-"+category_id).html("<i class='fa fa-toggle-on' status='Active'></i>");
             }
         }, 
         error: function () {
@@ -1684,7 +1683,7 @@ $(".updateCategoryStatus").click(function () {
 
 //append Category level
 $("#section_id").change(function () {
-    var section_id = $(this).val();
+    var status = $(this).children("i").attr("status");
     $.ajax({
         type:'post',
         url: '/admin/append-categories-level',
@@ -1708,7 +1707,7 @@ $("#section_id").change(function () {
     });*/
 
 //Confirm Delete Record with sweetalert2
-$(".confirmDelete").click(function () {
+$(document).on("click",".confirmDelete", function () {
     var record = $(this).attr("record");
     var recordid = $(this).attr("recordid");
     Swal.fire({
@@ -1727,7 +1726,7 @@ $(".confirmDelete").click(function () {
 });
 
 $(".updateProductStatus").click(function () {
-    var status = $(this).text();
+    var status = $(this).children("i").attr("status");
     var product_id = $(this).attr("product_id");
     $.ajax({
         type:'post',
@@ -1735,9 +1734,9 @@ $(".updateProductStatus").click(function () {
         data: {status:status, product_id:product_id},
         success: function (resp) {
             if (resp['status']==0) {
-                $("#product-"+product_id).html("<a class='updateProductStatus' href='javascript:void(0)'>Inactive</a>");
+                $("#product-"+product_id).html("<i class='fa fa-toggle-off' status='Inactive'></i>");
             } else if (resp['status'] ==1) {
-                $("#product-"+product_id).html("<a class='updateProductStatus' href='javascript:void(0)'>Active</a>");
+                $("#product-"+product_id).html("<i class='fa fa-toggle-on' status='Active'></i>");
             }
         }, 
         error: function () {
@@ -1746,26 +1745,107 @@ $(".updateProductStatus").click(function () {
     });
 });
 
-$(document).ready(function () {
+$(".updateAttributeStatus").click(function () {
+    var status = $(this).children("i").attr("status");
+    var attribute_id = $(this).attr("attribute_id");
+    $.ajax({
+        type:'post',
+        url: '/admin/update-attribute-status',
+        data: {status:status, attribute_id:attribute_id},
+        success: function (resp) {
+            if (resp['status']==0) {
+                $("#attribute-"+attribute_id).html("<i class='fa fa-toggle-off' status='Inactive'></i>");
+            } else if (resp['status'] ==1) {
+                $("#attribute-"+attribute_id).html("<i class='fa fa-toggle-on' status='Active'></i>");
+            }
+        }, 
+        error: function () {
+            alert("Error");
+        }
+    });
+});
 
-    init_sparklines();
-    init_flot_chart();
-    init_sidebar();
-    init_wysiwyg();
-    init_InputMask();
-    init_JQVmap();
-    init_cropper();
-    init_knob();
-    init_IonRangeSlider();
-    init_ColorPicker();
-    init_TagsInput();
-    init_parsley();
-    init_skycons();
-    init_select2();
-    init_validator();
-    init_CustomNotification();
-    init_autosize();
-    init_autocomplete();
+$(".updateImageStatus").click(function () {
+    var status = $(this).children("i").attr("status");
+    var image_id = $(this).attr("image_id");
+    $.ajax({
+        type:'post',
+        url: '/admin/update-image-status',
+        data: {status:status, image_id:image_id},
+        success: function (resp) {
+            if (resp['status']==0) {
+                $("#image-"+image_id).html("<i class='fa fa-toggle-off' status='Inactive'></i>");
+            } else if (resp['status'] ==1) {
+                $("#image-"+image_id).html("<i class='fa fa-toggle-on' status='Active'></i>");
+            }
+        }, 
+        error: function () {
+            alert("Error");
+        }
+    });
+});
 
-});	
+$(".updateBrandStatus").click(function () {
+    var status = $(this).children("i").attr("status");
+    var brand_id = $(this).attr("brand_id");
+    $.ajax({
+        type:'post',
+        url: '/admin/update-brand-status',
+        data: {status:status, brand_id:brand_id},
+        success: function (resp) {
+            if (resp['status']==0) {
+                $("#brand-"+brand_id).html("<i class='fa fa-toggle-off' status='Inactive'></i>");
+            } else if (resp['status'] ==1) {
+                $("#brand-"+brand_id).html("<i class='fa fa-toggle-on' status='Active'></i>");
+            }
+        }, 
+        error: function () {
+            alert("Error");
+        }
+    });
+});
+    var maxField = 10; //Input fields increment limitation
+    var addButton = $('.add_button'); //Add button selector
+    var wrapper = $('.field_wrapper'); //Input field wrapper
+    var fieldHTML = '<div><div  style="height: 10px;" ></div><input type="text" name="size[]" value="" placeholder="size"/>&nbsp;<input type="text" name="sku[]" value=""placeholder="sku"/>&nbsp;<input type="text" name="price[]" value="" placeholder="price"/>&nbsp;<input type="text" name="stock[]" value="" placeholder="stock"/>&nbsp;<a href="javascript:void(0);" class="remove_button">Delete</a></div>'; //New input field html 
+    var x = 1; //Initial field counter is 1
+    
+    //Once add button is clicked
+    $(addButton).click(function(){
+        //Check maximum number of input fields
+        if(x < maxField){ 
+            x++; //Increment field counter
+            $(wrapper).append(fieldHTML); //Add field html
+        }
+    });
+    
+    //Once remove button is clicked
+    $(wrapper).on('click', '.remove_button', function(e){
+        e.preventDefault();
+        $(this).parent('div').remove(); //Remove field html
+        x--; //Decrement field counter
+    });
+
+    $(document).ready(function () {
+
+        init_sparklines();
+        init_flot_chart();
+        init_sidebar();
+        init_wysiwyg();
+        init_InputMask();
+        init_JQVmap();
+        init_cropper();
+        init_knob();
+        init_IonRangeSlider();
+        init_ColorPicker();
+        init_TagsInput();
+        init_parsley();
+        init_skycons();
+        init_select2();
+        init_validator();
+        init_CustomNotification();
+        init_autosize();
+        init_autocomplete();
+
+    });	
 
