@@ -81,6 +81,13 @@
                           </p>
                         </a>
                       </li>
+                      <li>
+                        <a href="{{url('admin/banners')}}" class="nav-link">
+                          <p>
+                            Banners
+                          </p>
+                        </a>
+                      </li>
                     </ul>
                   </li>
                 </ul>

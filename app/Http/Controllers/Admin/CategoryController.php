@@ -44,6 +44,8 @@ class CategoryController extends Controller
 			$getCategories = array();
 			$message = 'Category added successfully';
 
+			
+
 		} else {
 			// edit functionality
 			$title = "Edit Category";
@@ -137,7 +139,7 @@ class CategoryController extends Controller
 		}
 
 		$getSections = Section::get();
-
+		//echo "<pre>";print_r($getSections);die;
 		return view('admin.categories.add_edit_category')->with(compact('title', 'getSections', 'categorydata', 'getCategories'));
 		
 	}
@@ -147,7 +149,8 @@ class CategoryController extends Controller
 		if ($request->ajax()) {
 			$data = $request->all();
 
-			$getCategories = Category::with('subcategories')->where(['section_id'=>$data['section_id'], 'parent_id'=>0, 'status'=>1])->get();
+			$getCategories = Category::with('subcategories')->where(['section_id'=>$data['section_id'], 'parent_id'=>0, 'status'=>1])->get()->toArray();
+			//echo "<pre>";print_r($getCategories);die;
 			return view('admin.categories.append_categories_level')->with(compact('getCategories'));
 		}
 	}

@@ -60,16 +60,27 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
        Route::post('/update-image-status', 'ProductsController@updateImageStatus');
 	   Route::get('/delete-image/{id}', 'ProductsController@deleteImage');
 
+
 	   //Brands
 	    Route::get('brands','BrandController@brands');
 	    Route::post('update-brand-status','BrandController@updateBrandStatus');
 	    Route::match(['get','post'],'add-edit-brand/{id?}','BrandController@addEditBrand');
 	    Route::get('delete-brand/{id?}','BrandController@deleteBrand');
+
+	    //Banner
+	    Route::get('banners','BannersController@banners');
+	    Route::post('update-banner-status','BannersController@updateBannerStatus');
+	    Route::get('delete-banner/{id?}','BannersController@deleteBanner');
+	    Route::match(['get','post'],'add-edit-banner/{id?}','BannersController@addEditBanner');
     });
 
 }); 
 
 
 Route::namespace('Front')->group(function(){
+		//Homepage 
 		Route::get('/', 'IndexController@index');
+		//Listing Categories Route
+	   Route::get('/{url}','ProductsController@listing');
+
 	});

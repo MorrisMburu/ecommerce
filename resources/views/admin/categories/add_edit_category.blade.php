@@ -53,9 +53,10 @@
 												<select id="section_id" name="section_id" class="custom-select">
 													<option value="">Section</option>
 													@foreach($getSections as $section)
-													<option value="{{$section->id}}" 
-														@if(!empty($categorydata['section_id']) &&$categorydata['section_id'] ==$section->id) selected @endif>{{$section->name}}</option>
-														@endforeach
+													<option value="{{$section->id}}">
+														{{$section->name}}
+													</option>
+													@endforeach
 													</select>
 												</div>
 											</div>

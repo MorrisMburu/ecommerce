@@ -1680,10 +1680,9 @@ $(".updateCategoryStatus").click(function () {
     });
 });
 
+$('#section_id').change(function () {
+    var section_id = $(this).val();
 
-//append Category level
-$("#section_id").change(function () {
-    var status = $(this).children("i").attr("status");
     $.ajax({
         type:'post',
         url: '/admin/append-categories-level',
@@ -1695,7 +1694,7 @@ $("#section_id").change(function () {
             alert("Error");
         }
     });
-});
+})
 
 //Confirm Delete Record 
 /*$(".confirmDelete").click(function () {
@@ -1797,6 +1796,26 @@ $(".updateBrandStatus").click(function () {
                 $("#brand-"+brand_id).html("<i class='fa fa-toggle-off' status='Inactive'></i>");
             } else if (resp['status'] ==1) {
                 $("#brand-"+brand_id).html("<i class='fa fa-toggle-on' status='Active'></i>");
+            }
+        }, 
+        error: function () {
+            alert("Error");
+        }
+    });
+});
+
+$(".updateBannerStatus").click(function () {
+    var status = $(this).children("i").attr("status");
+    var banner_id = $(this).attr("banner_id");
+    $.ajax({
+        type:'post',
+        url: '/admin/update-banner-status',
+        data: {status:status, banner_id:banner_id},
+        success: function (resp) {
+            if (resp['status']==0) {
+                $("#banner-"+banner_id).html("<i class='fa fa-toggle-off' status='Inactive'></i>");
+            } else if (resp['status'] ==1) {
+                $("#banner-"+banner_id).html("<i class='fa fa-toggle-on' status='Active'></i>");
             }
         }, 
         error: function () {
